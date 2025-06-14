@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>이서진 포트폴리오</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #FFD9E0;
+      padding: 30px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: white;
+    }
+    nav a {
+      margin: 0 10px;
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      border-left: 6px solid #FFD9E0;
+      padding-left: 12px;
+      margin-top: 40px;
+      margin-bottom: 10px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #FFD9E0;
+      font-size: 0.9em;
+    }
+
+    /* 프로필 소개 섹션 */
+     .name {
+  font-size: 36px;
+  font-weight: 800;
+  color: #323232;
+  display: block;
+  margin-bottom: 10px;
+}
+    
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .profile img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #FFD9E0;
+    }
+
+    .profile-text {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8em;
+      }
+
+      .profile {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+      .tag-box {
+  display: inline-block;
+  background-color: #e0e0e0; /* 연회색 박스 배경 */
+  color: #4f4f4f;           /* 진한 회색 텍스트 */
+  font-weight: bold;        /* 굵은 글씨 */
+  padding: 5px 10px;        /* 여백 */
+  border-radius: 5px;       /* 둥근 테두리 */
+  font-size: 0.9em;        /* 약간 작은 글씨 */
+  margin-top: 9px;         /* 위 요소와의 간격 */
+}
+..projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.03);
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+}
+
+.project-description {
+  padding: 10px;
+  font-size: 14px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 70%;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.modal-content img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+
+<meta charset="UTF-8">
+  <title>Work Experience</title>
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      margin: 40px;
+      background-color: #fff;
+      color: #333;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 24px;
+    }
+    .container {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .section {
+      flex: 1;
+      min-width: 320px;
+    }
+    .section h2 {
+      font-size: 18px;
+      background-color: #ffeef1;
+      padding: 8px 16px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 16px;
+      color: #222;
+    }
+    .item {
+      margin-bottom: 24px;
+    }
+    .date {
+      color: #e83e59;
+      font-weight: bold;
+      font-family: 'Courier New', monospace;
+    }
+    .title {
+      font-weight: 600;
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .note {
+      margin-top: 30px;
+      background-color: #f9f9f9;
+      padding: 16px 20px;
+      border-left: 5px solid #e83e59;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #555;
+    }
+    .container {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.container.hidden {
+  display: none;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>이서진 (Lee Seojin)</h1>
+    <nav>
+      <a href="https://www.instagram.com/bijou_jjin_/" target="_blank">인스타</a> |
+      <a href="https://www.youtube.com/@밍묭먕묭-m3w" target="_blank">유튜브</a> |
+      <a href="https://blog.naver.com/leesjin2003" target="_blank">블로그</a>
+    </nav>
+  </header>
+
+  <section class="profile">
+    <img src="profile.jpg" alt="이서진 프로필 사진">
+    <div class="profile-text">
+      <p>
+        <strong class="name">이서진(Lee Seojin)</strong><br>
+        <strong>애니메이터 • 3D 디자이너</strong><br>
+        <br>
+        🌟당신이 상상하던 세계를 현실로 만들어드립니다🌟 <br>
+        <div class="tag-box">#infp</div> 
+        <div class="tag-box">#infj</div> 
+        <div class="tag-box">#기록</div> 
+        <div class="tag-box">#성장</div>
+        <div class="tag-box">#창작</div>
+        <div class="tag-box">#애니메이션</div> <br>
+        <br>
+        🌷<br>
+        창의적인 3D모델링과 애니메이션으로 생동감 있는 비쥬얼을 구현합니다.<br> 
+        세밀한 디테일과 감각적인 연출과 차별화된 스토리를 만듭니다. 💫<br>
+        <br>
+        <strong>사용 가능 언어</strong><br>
+        • 한국어 - 모국어<br>
+        • 영어 - 중급<br>
+        • 일본어 - 초급<br>
+      </p>
+    </div>
+  </section>
+
+  <section>
+  <h2>△ 대표 프로젝트</h2>
+  <section class="projects-grid">
+    <div class="project-card" onclick="openModal('modal0')">
+      <img class="project-image" src="project1.jpg">
+      <div class="project-description">
+        <strong>3D Modeling</strong><br>
+        애니메이션 분석 기반 정밀 제작
+      </div>
+    </div>
+
+    <div class="project-card" onclick="openModal('modal1')">
+      <img class="project-image" src="project2.jpg">
+      <div class="project-description">
+        <strong>Story on Air</strong><br>
+        보이는 라디오&팟캐스트 기획부터 편집까지 직접 운영
+      </div>
+    </div>
+
+    <div class="project-card" onclick="openModal('modal2')">
+      <img class="project-image" src="project3.jpeg">
+      <div class="project-description">
+        <strong>미디어 아트</strong><br>
+        동서양 회화와 스토리텔링 결합
+      </div>
+    </div>
+
+    <div class="project-card" onclick="openModal('modal3')">
+      <img class="project-image" src="project4.png">
+      <div class="project-description">
+        <strong>온천장 도시재생 서포터즈</strong><br>
+        영상 편집 및 지역 문화 참여
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ✨ 모달들 -->
+<div id="modal0" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal0')">&times;</span>
+    <img src="project1.jpg" alt="3D Modeling">
+    <h3>3D Modeling</h3>
+    <p>진격의 거인을 모티브로 정밀하게 입체기동장치를 제작했어! C4D로 직접 모델링하고 애니메이션 분석까지 했던 프로젝트야.</p>
+  </div>
+</div>
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal1')">&times;</span>
+    <img src="project2.jpg" alt="Story on Air">
+    <h3>Story on Air</h3>
+    <p>6주간 보이는 라디오와 팟캐스트를 기획, 촬영, 편집까지 전부 맡아서 운영했어. 음향과 스토리 구성에 집중했던 경험!</p>
+  </div>
+</div>
+
+<div id="modal2" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal2')">&times;</span>
+    <img src="project3.jpeg" alt="미디어 아트">
+    <h3>미디어 아트</h3>
+    <p>동서양의 회화를 활용해서 거울을 매개로 한 스토리텔링 미디어아트 영상을 제작했어. 시간과 공간을 넘나드는 감정 교류를 표현했지.</p>
+  </div>
+</div>
+
+<div id="modal3" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal3')">&times;</span>
+    <img src="project4.png" alt="온천장 서포터즈">
+    <h3>온천장 도시재생 서포터즈</h3>
+    <p>지역 문화 활성화를 위한 영상 콘텐츠를 직접 기획하고 촬영, 편집까지 했던 경험이야. 지역과 함께 숨 쉬는 콘텐츠였어!</p>
+  </div>
+</div>
+
+
+
+    <h2 class="toggle">△ 학력</h2>
+    <div class="content">
+      <ul>
+        <li>창원 대암고등학교 (2019~2022)</li>
+        <li>경성대학교 미디어콘텐츠학과 (2022~현재)</li>
+      </ul>
+    </div>
+
+    <h2 class="toggle">△ 자격 및 수료</h2>
+    <div class="content">
+      <ul>
+        <li>Toronto EC School general English course 수료 (2024.04~2024.07)</li>
+        <li>ILAC Toronto 어학원 pre-advanced 수료 (2024.07~2024.09)</li>
+      </ul>
+    </div>
+
+    <h2 class="toggle">△ Work Experience</h2>
+    <div class="container">
+
+    <div class="section">
+      <h2>🥤 Food & Beverage Service</h2>
+
+      <div class="item">
+        <div class="date">2022. 12. ~ Present</div>
+        <div class="title">공차 (서면점, 서면 문화로점, 경성대점)</div>
+        <ul>
+          <li>고객 서비스 및 음료 제조</li>
+          <li>매장 운영 및 재고 관리</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="date">2024. 03. ~ Present</div>
+        <div class="title">롯데백화점 Avenuel Lounge</div>
+        <ul>
+          <li>VIP 고객 응대 및 맞춤 서비스 제공</li>
+          <li>고급 서비스 운영 및 고객 경험 개선</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="date">2024. 08. ~ 12.</div>
+        <div class="title">Toronto Sansotei & Ewha (Working Holiday)</div>
+        <ul>
+          <li>글로벌 환경에서의 서버 업무 수행</li>
+          <li>다국적 팀원들과의 협업 및 의사소통</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🎙️ Content Creation & Community</h2>
+
+      <div class="item">
+        <div class="date">2023</div>
+        <div class="title">온천장 도시재생 서포터즈</div>
+        <ul>
+          <li>지역 활성화를 위한 콘텐츠 기획 및 제작</li>
+          <li>커뮤니티 프로젝트 참여 및 운영</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="date">2025. 03. ~ 04.</div>
+        <div class="title">보이는 라디오 & Podcast Host</div>
+        <ul>
+          <li>오리지널 콘텐츠 기획 및 제작</li>
+          <li>청취자와의 실시간 소통 및 프로그램 운영</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    다양한 서비스 업계에서의 경험을 통해 고객 중심적 사고와 효율적인 업무 처리 능력을 개발했습니다. 글로벌 환경에서의 근무 경험은 문화적 이해도와 의사소통 능력을 향상시켰으며, 콘텐츠 제작 분야에서는 창의적인 기획력을 발휘했습니다.
+  </div>
+
+
+    <h2 class="toggle">△ 기술</h2>
+    <div class="content">
+      <ul>
+        <li>3D 모델링: Cinema 4D</li>
+        <li>영상 편집: 프리미어, 애프터이펙트</li>
+        <li>디자인: 포토샵, 일러스트</li>
+        <li>기타: 파이썬 초급, 유튜브 운영 경험</li>
+      </ul>
+    </div>
+
+    <h2>연락처</h2>
+    <p>Email: leesjin2003@gmail.com</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Lee Seojin. All rights reserved.
+  </footer>
+
+  <script>
+    const toggles = document.querySelectorAll('.toggle');
+toggles.forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('active');
+    const content = toggle.nextElementSibling;
+    content.classList.toggle('hidden');
+
+    toggle.innerHTML = toggle.innerHTML.includes('△')
+      ? toggle.innerHTML.replace('△', '▽')
+      : toggle.innerHTML.replace('▽', '△');
+  });
+});
+
+    function openModal(id) {
+  document.getElementById(id).style.display = 'block';
+}
+function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
+}
+
+  </script>
+  <div id="popup" class="project-popup">
+  <span class="popup-close" onclick="closePopup()">✖</span>
+  <img id="popupImg" class="popup-image" src="" alt="팝업 이미지">
+  <div class="popup-content" id="popupText">
+    <!-- 여기에 상세 설명이 들어가 -->
+  </div>
+</div>
+<script>
+  const popup = document.getElementById('popup');
+  const popupImg = document.getElementById('popupImg');
+  const popupText = document.getElementById('popupText');
+
+  const projects = [
+  {
+    img: 'project1.jpg',
+    text: '🗓️기간<br>2023.03.02~2023.06.21<br><br>✿ 개요 <br> - 대학교 기말 과제<br> <br> ✿ 과정 <br>- 입체기동장치 3D 모델링 및 텍스처 작업<br>- 캐릭터 모델링 및 리깅<br>- 유튜브 튜토리얼 참고하여 독학으로 구현<br><br>✿ 결과<br>- 교수님 A 평가 획득<br>- 개인 포트폴리오 대표작품 선정'
+  },
+  {
+    img: 'project2.jpg',
+    text: '🗓️기간<br>2025.03.05~2025.04.16<br><br>✿ 과정<br>-보이는 라디오 & 팟캐스트는 6주간 진행된 프로젝트<br>-기획, 대본 작성, 녹음, 영상 촬영 및 편집<br>-홀로 라디오를 운영하며 실전 감각 익힘'
+  },
+  {
+    img: 'project3.jpeg',
+    text: '🗓️기간<br>2025.04.23~2025.06.18<br><br>✿ 과정<br>-동양화와 서양화를 기반으로 조선 양반 여성과 프랑스 귀부인이 거울을 통해 연결된다는 설정으로 스토리 구성<br>-로맨스 판타지풍의 몽환적인 영상미를 추구<br> -미디어위크 전시를 목표로 제작'
+  },
+    {
+  img: 'project4.png',
+  text: '🗓️기간<br>2023.07.11~2023.09.11<br><br>✿ 과정<br>-지역 콘텐츠 제작 및 홍보를 중심<br>-영상 촬영과 편집을 맡아 지역 문화를 널리 알리는 데 기여<br><br>✿ 결과<br><a href="https://youtu.be/w_Fqq93l94s?si=-I7e2XE9l46L-QC5" target="_blank" style="color:#00f; text-decoration:underline;">👉 영상 보러가기</a>'
+}
+];
+
+
+  function openPopup(index) {
+    popupImg.src = projects[index].img;
+    popupText.innerHTML = projects[index].text;
+    popup.style.display = 'block';
+  }
+
+  function closePopup() {
+    popup.style.display = 'none';
+  }
+  function openModal(modalId) {
+  document.getElementById(modalId).style.display = "block";
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = "none";
+}
+
+// 모달 바깥 클릭 시 닫히는 기능도 추가하고 싶다면 이 아래 코드도 추가해줘!
+window.onclick = function(event) {
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(function(modal) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+}
+
+</script>
+
+</body>
+</html>

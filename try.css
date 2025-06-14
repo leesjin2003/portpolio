@@ -1,0 +1,10 @@
+.tag-box {
+  display: inline-block;
+  background-color: #e0e0e0; /* 연회색 박스 배경 */
+  color: #4f4f4f;           /* 진한 회색 텍스트 */
+  font-weight: bold;        /* 굵은 글씨 */
+  padding: 6px 12px;        /* 여백 */
+  border-radius: 6px;       /* 둥근 테두리 */
+  font-size: 0.95em;        /* 약간 작은 글씨 */
+  margin-top: 10px;         /* 위와의 간격 */
+}

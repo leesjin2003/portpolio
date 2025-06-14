@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>나의 콘텐츠 소개</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fdfdfd;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .wrapper {
+      max-width: 1000px;
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .project-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: scale(1.02);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .project-title {
+      padding: 15px;
+      font-size: 1.1em;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* 팝업 */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 450px;
+      max-height: 80vh;
+      background: white;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      border-radius: 10px;
+      z-index: 9999;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    .popup-content {
+      padding: 20px;
+      overflow-y: auto;
+      max-height: 70vh;
+      font-size: 1em;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      font-size: 20px;
+      color: #999;
+      cursor: pointer;
+    }
+
+    @media (max-width: 700px) {
+      .wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+
+    <!-- 카드 1: 3D 모델링 -->
+    <div class="project-card" data-project="project1">
+      <img src="https://via.placeholder.com/400x200.png?text=3D+모델링" alt="3D 모델링">
+      <div class="project-title">3D 모델링 프로젝트</div>
+    </div>
+
+    <!-- 카드 2: 라디오 -->
+    <div class="project-card" data-project="project2">
+      <img src="https://via.placeholder.com/400x200.png?text=보이는+라디오" alt="라디오">
+      <div class="project-title">보이는 라디오</div>
+    </div>
+
+    <!-- 카드 3: 미디어 아트 -->
+    <div class="project-card" data-project="project3">
+      <img src="https://via.placeholder.com/400x200.png?text=미디어+아트" alt="미디어아트">
+      <div class="project-title">미디어 아트</div>
+    </div>
+
+    <!-- 카드 4: 동래구 서포터즈 -->
+    <div class="project-card" data-project="project4">
+      <img src="https://via.placeholder.com/400x200.png?text=온천장+서포터즈" alt="서포터즈">
+      <div class="project-title">동래구 온천장 서포터즈</div>
+    </div>
+  </div>
+
+  <!-- 팝업 창 -->
+  <div class="popup" id="popup">
+    <span class="popup-close" onclick="closePopup()">✕</span>
+    <div class="popup-content" id="popupContent"></div>
+  </div>
+
+  <script>
+    const contentData = {
+      project1: `
+        <h3>3D 모델링 프로젝트</h3>
+        <p>‘진격의 거인’을 모티브로 C4D를 활용해 제작한 3D 모델링 과제야.<br>
+        입체기동장치를 만들기 위해 수십 번 애니메이션을 참고했고, 사람 얼굴도 직접 모델링해봤지!<br>
+        교수님께도 좋은 평가를 받았고, 나 스스로도 되게 뿌듯했던 작업이야 😊</p>
+      `,
+      project2: `
+        <h3>보이는 라디오 프로젝트</h3>
+        <p>유튜브와 팟빵을 통해 직접 대본을 쓰고, 녹음하고, 편집까지 했던 6주간의 라디오 콘텐츠!<br>
+        이야기 구성, 나만의 톤 만들기, 전달 방식에 대해 많이 배웠던 소중한 경험이야.</p>
+      `,
+      project3: `
+        <h3>미디어 아트</h3>
+        <p>조선과 프랑스 두 시대의 여성 주인공이 거울을 통해 연결되는 서사를 담았어.<br>
+        고전 회화와 영상 편집, 국악과 클래식 음악이 어우러진 몽환적인 영상 콘텐츠로 제작했지.</p>
+      `,
+      project4: `
+        <h3>동래구 온천장 서포터즈</h3>
+        <p>도시재생 프로그램의 일환으로 참여했던 지역 서포터즈 활동이야.<br>
+        직접 인터뷰하고 콘텐츠 기획도 해봤고, 지역 사회를 다시 바라보는 계기가 되었어.</p>
+      `
+    };
+
+    // 카드 클릭 시 팝업 열기
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const projectKey = card.getAttribute('data-project');
+        document.getElementById('popupContent').innerHTML = contentData[projectKey];
+        document.getElementById('popup').style.display = 'flex';
+      });
+    });
+
+    // 팝업 닫기
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    // 팝업 외 클릭 시 닫기 (선택사항)
+    window.addEventListener('click', function(e) {
+      const popup = document.getElementById('popup');
+      if (e.target === popup) closePopup();
+    });
+  </script>
+
+</body>
+</html>
