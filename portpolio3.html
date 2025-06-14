@@ -222,6 +222,17 @@
   border-radius: 50%;
   cursor: pointer;
 }
+.content.hidden {
+  display: none;
+}
+.project-popup {
+  display: none;
+  /* 기존 스타일 유지 */
+}
+.project-popup.show {
+  display: block;
+  /* 팝업 활성화 시 스타일 */
+}
 
 
 <meta charset="UTF-8">
@@ -335,7 +346,7 @@
   </section>
 
   <section>
-   <h2>△ 대표 프로젝트</h2>
+   <h2> 대표 프로젝트</h2>
 <section class="projects-grid">
   <div class="project-card" onclick="openPopup(0)">
     <img class="project-image" src="project1.jpg">
@@ -480,12 +491,27 @@ toggles.forEach(toggle => {
   });
 });
 
-    function openModal(id) {
-  document.getElementById(id).style.display = 'block';
+const popup = document.getElementById('popup');
+const popupImg = document.getElementById('popupImg');
+const popupText = document.getElementById('popupText');
+
+const projects = [
+  // 프로젝트 배열 그대로 유지
+];
+
+function openPopup(index) {
+  if (!projects[index] || !projects[index].img) return; // 안전장치
+  popupImg.src = projects[index].img;
+  popupText.innerHTML = projects[index].text;
+  popup.classList.add('show');
 }
-function closeModal(id) {
-  document.getElementById(id).style.display = 'none';
+
+function closePopup() {
+  popup.classList.remove('show');
 }
+
+document.querySelector('.popup-close').addEventListener('click', closePopup);
+
 
   </script>
   <div id="popup" class="project-popup">
@@ -494,6 +520,7 @@ function closeModal(id) {
   <div class="popup-content" id="popupText">
   </div>
 </div>
+
 <script>
   const popup = document.getElementById('popup');
   const popupImg = document.getElementById('popupImg');
