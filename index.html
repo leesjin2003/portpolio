@@ -227,13 +227,34 @@
 }
 .project-popup {
   display: none;
-  /* 기존 스타일 유지 */
 }
 .project-popup.show {
   display: block;
-  /* 팝업 활성화 시 스타일 */
+}
+.popup-comments {
+  margin-top: 20px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
 }
 
+.popup-comments input,
+.popup-comments textarea {
+  width: 100%;
+  margin-top: 5px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.popup-comments button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #4c6ef5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 <meta charset="UTF-8">
   <title>Work Experience</title>
@@ -304,7 +325,6 @@
   display: none;
 }
 
-
   </style>
 </head>
 <body>
@@ -343,7 +363,9 @@
         • 일본어 - 초급<br>
       </p>
     </div>
+    
   </section>
+  
 
   <section>
    <h2> 대표 프로젝트</h2>
@@ -380,6 +402,7 @@
     </div>
   </div>
 </section>
+
 
     <h2 class="toggle">△ 학력</h2>
     <div class="content">
@@ -473,89 +496,79 @@
     <p>Email: leesjin2003@gmail.com</p>
   </section>
 
+  
   <footer>
     &copy; 2025 Lee Seojin. All rights reserved.
   </footer>
 
-  <script>
-    const toggles = document.querySelectorAll('.toggle');
-toggles.forEach(toggle => {
-  toggle.addEventListener('click', () => {
-    toggle.classList.toggle('active');
-    const content = toggle.nextElementSibling;
-    content.classList.toggle('hidden');
+<div id="popup" class="project-popup">
+    <span class="popup-close" onclick="closePopup()">✖</span>
+    <img id="popupImg" class="popup-image" src="" alt="팝업 이미지">
+    <div class="popup-content" id="popupText"></div>
 
-    toggle.innerHTML = toggle.innerHTML.includes('△')
-      ? toggle.innerHTML.replace('△', '▽')
-      : toggle.innerHTML.replace('▽', '△');
-  });
-});
-
-const popup = document.getElementById('popup');
-const popupImg = document.getElementById('popupImg');
-const popupText = document.getElementById('popupText');
-
-const projects = [
-  // 프로젝트 배열 그대로 유지
-];
-
-function openPopup(index) {
-  if (!projects[index] || !projects[index].img) return; // 안전장치
-  popupImg.src = projects[index].img;
-  popupText.innerHTML = projects[index].text;
-  popup.classList.add('show');
-}
-
-function closePopup() {
-  popup.classList.remove('show');
-}
-
-document.querySelector('.popup-close').addEventListener('click', closePopup);
-
-
-  </script>
-  <div id="popup" class="project-popup">
-  <span class="popup-close" onclick="closePopup()">✖</span>
-  <img id="popupImg" class="popup-image" src="" alt="팝업 이미지">
-  <div class="popup-content" id="popupText">
+    <div class="popup-comments">
+      <h3>💬 댓글</h3>
+      <ul id="commentList"></ul>
+      <input type="text" id="commentName" placeholder="이름을 입력해 주세요">
+      <textarea id="commentText" placeholder="댓글을 입력해 주세요"></textarea>
+      <button onclick="addComment()">댓글 달기</button>
+    </div>
   </div>
-</div>
 
-<script>
-  const popup = document.getElementById('popup');
-  const popupImg = document.getElementById('popupImg');
-  const popupText = document.getElementById('popupText');
+  <script>
+    const popup = document.getElementById('popup');
+    const popupImg = document.getElementById('popupImg');
+    const popupText = document.getElementById('popupText');
 
-  const projects = [
-  {
-    img: 'project1.jpg',
-    text: '🗓️기간<br>2023.03.02~2023.06.21<br><br>✿ 개요 <br> - 대학교 기말 과제<br> <br> ✿ 과정 <br>- 입체기동장치 3D 모델링 및 텍스처 작업<br>- 캐릭터 모델링 및 리깅<br>- 유튜브 튜토리얼 참고하여 독학으로 구현<br><br>✿ 결과<br>- 교수님 A 평가 획득<br>- 개인 포트폴리오 대표작품 선정'
-  },
-  {
-    img: 'project2.jpg',
-    text: '🗓️기간<br>2025.03.05~2025.04.16<br><br>✿ 과정<br>-보이는 라디오 & 팟캐스트는 6주간 진행된 프로젝트<br>-기획, 대본 작성, 녹음, 영상 촬영 및 편집<br>-홀로 라디오를 운영하며 실전 감각 익힘'
-  },
-  {
-    img: 'project3.jpeg',
-    text: '🗓️기간<br>2025.04.23~2025.06.18<br><br>✿ 과정<br>-동양화와 서양화를 기반으로 조선 양반 여성과 프랑스 귀부인이 거울을 통해 연결된다는 설정으로 스토리 구성<br>-로맨스 판타지풍의 몽환적인 영상미를 추구<br> -미디어위크 전시를 목표로 제작'
-  },
-    {
-  img: 'project4.png',
-  text: '🗓️기간<br>2023.07.11~2023.09.11<br><br>✿ 과정<br>-지역 콘텐츠 제작 및 홍보를 중심<br>-영상 촬영과 편집을 맡아 지역 문화를 널리 알리는 데 기여<br><br>✿ 결과<br><a href="https://youtu.be/w_Fqq93l94s?si=-I7e2XE9l46L-QC5" target="_blank" style="color:#00f; text-decoration:underline;">👉 영상 보러가기</a>'
-}
-];
+    const projects = [
+      {
+        img: 'project1.jpg',
+        text: '🗓️기간<br>2023.03.02~2023.06.21<br><br>✿ 개요 <br> - 대학교 기말 과제<br> <br> ✿ 과정 <br>- 입체기동장치 3D 모델링 및 텍스처 작업<br>- 캐릭터 모델링 및 리깅<br>- 유튜브 튜토리얼 참고하여 독학으로 구현<br><br>✿ 결과<br>- 교수님 A 평가 획득<br>- 개인 포트폴리오 대표작품 선정'
+      },
+      {
+        img: 'project2.jpg',
+        text: '🗓️기간<br>2025.03.05~2025.04.16<br><br>✿ 과정<br>-보이는 라디오 & 팟캐스트는 6주간 진행된 프로젝트<br>-기획, 대본 작성, 녹음, 영상 촬영 및 편집<br>-홀로 라디오를 운영하며 실전 감각 익힘'
+      },
+      {
+        img: 'project3.jpeg',
+        text: '🗓️기간<br>2025.04.23~2025.06.18<br><br>✿ 과정<br>-동양화와 서양화를 기반으로 조선 양반 여성과 프랑스 귀부인이 거울을 통해 연결된다는 설정으로 스토리 구성<br>-로맨스 판타지풍의 몽환적인 영상미를 추구<br> -미디어위크 전시를 목표로 제작'
+      },
+      {
+        img: 'project4.png',
+        text: '🗓️기간<br>2023.07.11~2023.09.11<br><br>✿ 과정<br>-지역 콘텐츠 제작 및 홍보를 중심<br>-영상 촬영과 편집을 맡아 지역 문화를 널리 알리는 데 기여<br><br>✿ 결과<br><a href="https://youtu.be/w_Fqq93l94s?si=-I7e2XE9l46L-QC5" target="_blank" style="color:#00f; text-decoration:underline;">👉 영상 보러가기</a>'
+      }
+    ];
 
+    function openPopup(index) {
+      if (!projects[index] || !projects[index].img) return;
+      popupImg.src = projects[index].img;
+      popupText.innerHTML = projects[index].text;
+      popup.classList.add('show');
+    }
 
-  function openPopup(index) {
-    popupImg.src = projects[index].img;
-    popupText.innerHTML = projects[index].text;
-    popup.style.display = 'block';
-  }
+    function closePopup() {
+      popup.classList.remove('show');
+    }
 
-  function closePopup() {
-    popup.style.display = 'none';
-  }
-</script>
+    function addComment() {
+      const name = document.getElementById('commentName').value.trim();
+      const comment = document.getElementById('commentText').value.trim();
+      const list = document.getElementById('commentList');
+
+      if (!name || !comment) {
+        alert('이름과 코멘트를 모두 입력해줘!');
+        return;
+      }
+
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${name}</strong>: ${comment}`;
+      list.appendChild(li);
+
+      // 입력 초기화
+      document.getElementById('commentName').value = '';
+      document.getElementById('commentText').value = '';
+    }
+  </script>
 
 </body>
 </html>
