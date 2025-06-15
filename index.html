@@ -309,7 +309,7 @@
       margin-top: 30px;
       background-color: #f9f9f9;
       padding: 16px 20px;
-      border-left: 5px solid #e83e59;
+      border-left: 5px solid #f07a90;
       border-radius: 8px;
       font-size: 14px;
       line-height: 1.6;
@@ -324,7 +324,72 @@
 .container.hidden {
   display: none;
 }
+  .contact-popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1001; /* 프로젝트 팝업보다 위 */
+  }
 
+  .contact-popup-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+
+  .contact-popup-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #666;
+  }
+
+  .contact-popup-box h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+
+  .contact-popup-box label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+  }
+
+  .contact-popup-box input,
+  .contact-popup-box textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+  }
+
+  .contact-popup-box button {
+    margin-top: 16px;
+    padding: 10px 20px;
+    background: #007bff;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .contact-popup-box button:hover {
+    background: #0056b3;
+  }
   </style>
 </head>
 <body>
@@ -368,7 +433,7 @@
   
 
   <section>
-   <h2> 대표 프로젝트</h2>
+   <h2> 📂 대표 프로젝트</h2>
 <section class="projects-grid">
   <div class="project-card" onclick="openPopup(0)">
     <img class="project-image" src="project1.jpg">
@@ -404,15 +469,16 @@
 </section>
 
 
-    <h2 class="toggle">△ 학력</h2>
+    <h2 class="toggle">△ 🎓 학력</h2>
     <div class="content">
       <ul>
         <li>창원 대암고등학교 (2019~2022)</li>
         <li>경성대학교 미디어콘텐츠학과 (2022~현재)</li>
+        <li>2027 경성대학교 미디어콘텐츠학과 졸업 예정</li>
       </ul>
     </div>
 
-    <h2 class="toggle">△ 자격 및 수료</h2>
+    <h2 class="toggle">△ 🏆 자격 및 수료</h2>
     <div class="content">
       <ul>
         <li>Toronto EC School general English course 수료 (2024.04~2024.07)</li>
@@ -482,18 +548,20 @@
   </div>
 
 
-    <h2 class="toggle">△ 기술</h2>
+    <h2 class="toggle">△ 👩🏻‍💻 기술</h2>
     <div class="content">
       <ul>
-        <li>3D 모델링: Cinema 4D</li>
-        <li>영상 편집: 프리미어, 애프터이펙트</li>
-        <li>디자인: 포토샵, 일러스트</li>
-        <li>기타: 파이썬 초급, 유튜브 운영 경험</li>
+        <li><strong>3D 모델링</strong>: Cinema 4D ★★☆☆☆</li>
+        <li><strong>영상 편집</strong>: 프리미어 ★★★☆☆, 애프터이펙트 ★★☆☆☆</li>
+        <li><strong>디자인</strong>: 포토샵 ★★★☆☆, 일러스트 ★★★☆☆</li>
+        <li><strong>문서</strong>: 워드 ★★★★☆, 파워포인트 ★★★★☆, <br>노션 ★★★☆☆</li>
+        <li><strong>기타</strong>: 파이썬 초급, 유튜브 운영 경험</li>
       </ul>
     </div>
 
-    <h2>연락처</h2>
-    <p>Email: leesjin2003@gmail.com</p>
+    <h2>📞 연락처</h2>
+    <p>Email: <a href="#" onclick="openContactPopup()" style="text-decoration: underline;">leesjin2003@naver.com</a></p>
+
   </section>
 
   
@@ -514,6 +582,29 @@
       <button onclick="addComment()">댓글 달기</button>
     </div>
   </div>
+
+ <div id="contactPopup" class="contact-popup-overlay">
+  <div class="contact-popup-box">
+    <span class="contact-popup-close" onclick="closeContactPopup()">✖</span>
+    <h2>Contact Me</h2>
+    <form id="contactForm">
+      <label for="email">Your E-mail</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" required>
+
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName">
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</div>
+
 
   <script>
     const toggles = document.querySelectorAll('.toggle');
@@ -580,6 +671,21 @@ toggles.forEach(toggle => {
       document.getElementById('commentName').value = '';
       document.getElementById('commentText').value = '';
     }
+
+  function openContactPopup() {
+    document.getElementById("contactPopup").style.display = "flex";
+  }
+
+  function closeContactPopup() {
+    document.getElementById("contactPopup").style.display = "none";
+  }
+
+  document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    alert("메시지가 전송되었습니다. 감사합니다!");
+    closeContactPopup();
+  });
+</script>
   </script>
 
 </body>
