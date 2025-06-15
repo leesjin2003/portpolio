@@ -516,6 +516,18 @@
   </div>
 
   <script>
+    const toggles = document.querySelectorAll('.toggle');
+toggles.forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('active');
+    const content = toggle.nextElementSibling;
+    content.classList.toggle('hidden');
+
+    toggle.innerHTML = toggle.innerHTML.includes('△')
+      ? toggle.innerHTML.replace('△', '▽')
+      : toggle.innerHTML.replace('▽', '△');
+  });
+});
     const popup = document.getElementById('popup');
     const popupImg = document.getElementById('popupImg');
     const popupText = document.getElementById('popupText');
