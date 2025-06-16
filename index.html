@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>이서진 포트폴리오</title>
   <style>
+    
     body {
       font-family: 'Segoe UI', sans-serif;
       background-color: #ffffff;
@@ -52,6 +53,24 @@
       background-color: #FFD9E0;
       font-size: 0.9em;
     }
+    .fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+button {
+  transition: transform 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
 
     /* 프로필 소개 섹션 */
      .name {
@@ -75,7 +94,14 @@
       border-radius: 50%;
       object-fit: cover;
       border: 4px solid #FFD9E0;
-    }
+      animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+  
 
     .profile-text {
       flex: 1;
@@ -120,7 +146,7 @@
 }
 
 .project-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.05);
 }
 
 .project-image {
@@ -403,7 +429,7 @@
     </nav>
   </header>
 
-  <section class="profile">
+  <section class="profile fade-in">
     <img src="profile.jpg" alt="이서진 프로필 사진">
     <div class="profile-text">
       <p>
@@ -434,7 +460,7 @@
 
   <section>
    <h2> 📂 대표 프로젝트</h2>
-<section class="projects-grid">
+<section class="projects-grid fade-in">
   <div class="project-card" onclick="openPopup(0)">
     <img class="project-image" src="project1.jpg">
     <div class="project-description">
@@ -685,6 +711,19 @@ toggles.forEach(toggle => {
     alert("메시지가 전송되었습니다. 감사합니다!");
     closeContactPopup();
   });
+
+  // 이 스크립트를 HTML 맨 아래에 붙여줘!
+  const faders = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  });
+
+  faders.forEach(fade => observer.observe(fade));
+
 </script>
   </script>
 
